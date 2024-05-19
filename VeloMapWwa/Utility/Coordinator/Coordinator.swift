@@ -12,6 +12,7 @@ enum Page: Hashable {
     case bikeStationDetail(Place)
 }
 
+@MainActor
 class Coordinator: ObservableObject {
     @Published var path = NavigationPath()
 
@@ -20,7 +21,9 @@ class Coordinator: ObservableObject {
     }
 
     func pop() {
-        path.removeLast()
+        if path.count >= 1 {
+            path.removeLast()
+        }
     }
 
     func popToRoot() {
@@ -33,7 +36,7 @@ class Coordinator: ObservableObject {
         case .bikeStationsList:
             BikeStationsListView()
         case let .bikeStationDetail(station):
-            EmptyView()
+            BikeStationDetailView(station: station)
         }
     }
 }

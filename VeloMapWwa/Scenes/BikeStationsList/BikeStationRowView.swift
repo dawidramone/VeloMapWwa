@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct BikeStationRowView: View {
+    var isOnMap: Bool = false
     var station: Place
+
+    init(isOnMap: Bool = false, station: Place) {
+        self.isOnMap = isOnMap
+        self.station = station
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -43,22 +49,29 @@ struct BikeStationRowView: View {
                         .font(.caption)
                         .foregroundColor(.gray)
                 }
+
                 Spacer()
+            }
+
+            if isOnMap {
+                Rectangle()
+                    .fill(.white)
+                    .frame(height: 30)
             }
         }
         .padding()
         .background(Color.white)
         .cornerRadius(10)
-        .bottomShadow(color: .black, radius: 5, x: 0, y: 5)
+        .bottomShadow(color: isOnMap ? .clear : .black, radius: 5, x: 0, y: 5)
     }
 }
 
 #Preview {
-    BikeStationRowView(station: Place(id: 1,
-                                      name: "047 Ofiar Dąbia",
-                                      bike: 7,
-                                      freeRacks: 20,
-                                      lat: 50.0671,
-                                      lng: 19.9450))
+    BikeStationRowView(isOnMap: true, station: Place(id: 1,
+                                                     name: "047 Ofiar Dąbia",
+                                                     bike: 7,
+                                                     freeRacks: 20,
+                                                     lat: 50.0671,
+                                                     lng: 19.9450))
         .padding()
 }

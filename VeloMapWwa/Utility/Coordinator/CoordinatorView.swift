@@ -20,6 +20,7 @@ struct CoordinatorView: View {
             coordinator.build(page: .bikeStationsList)
                 .navigationDestination(for: Page.self) { page in
                     coordinator.build(page: page)
+                        .navigationBarBackButtonHidden(true)
                 }
         }
         .environmentObject(coordinator)
