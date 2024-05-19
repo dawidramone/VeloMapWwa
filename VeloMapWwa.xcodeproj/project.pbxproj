@@ -15,6 +15,8 @@
 		7736DAF22BFA0EC8005373D3 /* VeloMapWwaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DAF12BFA0EC8005373D3 /* VeloMapWwaUITestsLaunchTests.swift */; };
 		7736DB072BFA1515005373D3 /* BikeStationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB062BFA1515005373D3 /* BikeStationResponse.swift */; };
 		7736DB092BFA1605005373D3 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB082BFA1605005373D3 /* NetworkingManager.swift */; };
+		7736DB0B2BFA17C5005373D3 /* BikeStationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB0A2BFA17C4005373D3 /* BikeStationRowView.swift */; };
+		7736DB0E2BFA1C3C005373D3 /* BottomShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB0D2BFA1C3C005373D3 /* BottomShadow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		7736DAF12BFA0EC8005373D3 /* VeloMapWwaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloMapWwaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7736DB062BFA1515005373D3 /* BikeStationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeStationResponse.swift; sourceTree = "<group>"; };
 		7736DB082BFA1605005373D3 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		7736DB0A2BFA17C4005373D3 /* BikeStationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeStationRowView.swift; sourceTree = "<group>"; };
+		7736DB0D2BFA1C3C005373D3 /* BottomShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,7 @@
 		7736DAD32BFA0EC7005373D3 /* VeloMapWwa */ = {
 			isa = PBXGroup;
 			children = (
+				7736DB0C2BFA1C17005373D3 /* Modifiers */,
 				7736DB052BFA14FF005373D3 /* Models */,
 				7736DB032BFA138C005373D3 /* Networking */,
 				7736DAFE2BFA0F3B005373D3 /* App */,
@@ -159,6 +164,7 @@
 		7736DB012BFA0FC4005373D3 /* BikeStationsList */ = {
 			isa = PBXGroup;
 			children = (
+				7736DB0A2BFA17C4005373D3 /* BikeStationRowView.swift */,
 			);
 			path = BikeStationsList;
 			sourceTree = "<group>";
@@ -184,6 +190,14 @@
 				7736DB062BFA1515005373D3 /* BikeStationResponse.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		7736DB0C2BFA1C17005373D3 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				7736DB0D2BFA1C3C005373D3 /* BottomShadow.swift */,
+			);
+			path = Modifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,7 +332,9 @@
 			files = (
 				7736DB092BFA1605005373D3 /* NetworkingManager.swift in Sources */,
 				7736DAD52BFA0EC7005373D3 /* VeloMapWwaApp.swift in Sources */,
+				7736DB0E2BFA1C3C005373D3 /* BottomShadow.swift in Sources */,
 				7736DB072BFA1515005373D3 /* BikeStationResponse.swift in Sources */,
+				7736DB0B2BFA17C5005373D3 /* BikeStationRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
