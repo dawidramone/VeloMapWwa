@@ -14,7 +14,7 @@ struct BikeStationRowView: View {
         VStack(alignment: .leading, spacing: 10) {
             Text(station.name)
                 .font(.headline)
-            Text("500m • Aleja Pokoju 16, Kraków") //TODO: Add real distance
+            Text("500m • Aleja Pokoju 16, Kraków") // TODO: Add real distance
                 .font(.subheadline)
                 .foregroundColor(.gray)
 

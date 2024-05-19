@@ -19,8 +19,8 @@ final class NetworkingManager {
         case decodingFailed(Error)
     }
 
-    func fetchData<T: Decodable>(from urlString: String, responseType: T.Type) async throws -> T {
-        guard let url = URL(string: urlString) else {
+    func fetchData<T: Decodable>(from endpoint: Endpoint, responseType: T.Type) async throws -> T {
+        guard let url = URL(string: endpoint.path) else {
             throw NetworkError.invalidURL
         }
 

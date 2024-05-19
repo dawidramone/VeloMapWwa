@@ -20,7 +20,7 @@ struct City: Codable {
     let places: [Place]
 }
 
-struct Place: Codable, Identifiable {
+struct Place: Codable, Identifiable, Hashable {
     let id: Int
     let name: String
     let bike: Int
