@@ -11,6 +11,7 @@ struct PageLayout<Content: View>: View {
     var showBackButton: Bool
     var onBackClick: (() -> Void)?
     var content: () -> Content
+    @State private var topSafeAreaInset: CGFloat = 0.0
 
     init(showBackButton: Bool, onBackClick: (() -> Void)? = nil, @ViewBuilder content: @escaping () -> Content) {
         self.showBackButton = showBackButton
@@ -35,10 +36,10 @@ struct PageLayout<Content: View>: View {
                         Spacer()
                     }
                     .frame(height: 44)
-                    .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top)
+                    .padding(.top, topSafeAreaInset)
                 }
             }
-            .frame(height: 44 + (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0))
+            .frame(height: 44 + topSafeAreaInset)
             .background(Color.customNavyBlue)
 
             content()
@@ -46,7 +47,18 @@ struct PageLayout<Content: View>: View {
 
             Spacer(minLength: 0)
         }
+        .onAppear {
+            updateSafeAreaInsets()
+        }
         .edgesIgnoringSafeArea(.top)
+    }
+
+    private func updateSafeAreaInsets() {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first {
+                topSafeAreaInset = window.safeAreaInsets.top
+            }
+        }
     }
 }
 

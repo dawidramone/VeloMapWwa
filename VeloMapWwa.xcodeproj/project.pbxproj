@@ -26,6 +26,7 @@
 		7736DB1E2BFA45EF005373D3 /* BikeStationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB1D2BFA45EF005373D3 /* BikeStationsViewModel.swift */; };
 		7736DB202BFA4628005373D3 /* BikeStationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB1F2BFA4628005373D3 /* BikeStationDetailView.swift */; };
 		7736DB232BFA83DE005373D3 /* PageLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB222BFA83DE005373D3 /* PageLayout.swift */; };
+		7736DB262BFAA08C005373D3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB252BFAA08C005373D3 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		7736DB1D2BFA45EF005373D3 /* BikeStationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeStationsViewModel.swift; sourceTree = "<group>"; };
 		7736DB1F2BFA4628005373D3 /* BikeStationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeStationDetailView.swift; sourceTree = "<group>"; };
 		7736DB222BFA83DE005373D3 /* PageLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLayout.swift; sourceTree = "<group>"; };
+		7736DB242BFA9F8C005373D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7736DB252BFAA08C005373D3 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +121,7 @@
 		7736DAD32BFA0EC7005373D3 /* VeloMapWwa */ = {
 			isa = PBXGroup;
 			children = (
+				7736DB242BFA9F8C005373D3 /* Info.plist */,
 				7736DB212BFA83AB005373D3 /* Components */,
 				7736DB112BFA23D2005373D3 /* Utility */,
 				7736DB0C2BFA1C17005373D3 /* Modifiers */,
@@ -230,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				7736DB122BFA23E1005373D3 /* Coordinator */,
+				7736DB252BFAA08C005373D3 /* LocationManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 			files = (
 				7736DB092BFA1605005373D3 /* NetworkingManager.swift in Sources */,
 				7736DB1A2BFA32DB005373D3 /* Colors.swift in Sources */,
+				7736DB262BFAA08C005373D3 /* LocationManager.swift in Sources */,
 				7736DB182BFA2E2E005373D3 /* Endpoint.swift in Sources */,
 				7736DAD52BFA0EC7005373D3 /* VeloMapWwaApp.swift in Sources */,
 				7736DB0E2BFA1C3C005373D3 /* BottomShadow.swift in Sources */,
@@ -561,6 +567,7 @@
 				DEVELOPMENT_TEAM = D8DD3N3SJ4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VeloMapWwa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -591,6 +598,7 @@
 				DEVELOPMENT_TEAM = D8DD3N3SJ4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VeloMapWwa/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

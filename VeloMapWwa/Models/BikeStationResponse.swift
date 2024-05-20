@@ -27,6 +27,14 @@ struct Place: Codable, Identifiable, Hashable {
     let freeRacks: Int
     let lat: Double
     let lng: Double
+    var distance: Double? {
+        didSet {
+            updateDistanceString()
+        }
+    }
+
+    var address: String?
+    var distanceString: String = "Distance not available"
 
     enum CodingKeys: String, CodingKey {
         case id = "uid"
@@ -35,5 +43,22 @@ struct Place: Codable, Identifiable, Hashable {
         case freeRacks = "free_racks"
         case lat
         case lng
+        case address
+    }
+
+    var fullAddress: String {
+        return address ?? "Address not available"
+    }
+
+    mutating func updateDistanceString() {
+        guard let distance = distance else {
+            distanceString = "Distance not available"
+            return
+        }
+        if distance > 1000 {
+            distanceString = String(format: "%.1f km", distance / 1000)
+        } else {
+            distanceString = String(format: "%.0f m", distance)
+        }
     }
 }

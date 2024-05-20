@@ -10,11 +10,17 @@ import SwiftUI
 
 struct BikeStationDetailView: View {
     @EnvironmentObject var coordinator: Coordinator
-    @State private var showStationDetails = false
     @ObservedObject var viewModel: BikeStationDetailViewModel
 
+    @State private var showStationDetails = false
+    @State private var route: MKRoute?
+    @State private var routeDestination: MKMapItem?
+    @State private var position: MapCameraPosition = .automatic
+    @State private var transportType = MKDirectionsTransportType.walking
+    @State private var travelInterval: TimeInterval?
+
     init(station: Place) {
-        viewModel = BikeStationDetailViewModel(station: station)
+        _viewModel = ObservedObject(wrappedValue: BikeStationDetailViewModel(station: station))
     }
 
     var body: some View {
@@ -23,16 +29,17 @@ struct BikeStationDetailView: View {
         } content: {
             VStack {
                 ZStack {
-                    // TODO: deprecated in iOS 17.0, replace with new Map
-                    Map(coordinateRegion: $viewModel.region, annotationItems: [viewModel.station]) { station in
-                        MapAnnotation(coordinate: CLLocationCoordinate2D(latitude: station.lat, longitude: station.lng)) {
+                    Map(position: $position) {
+                        UserAnnotation()
+                        Annotation("", coordinate: CLLocationCoordinate2D(latitude: viewModel.station.lat, longitude: viewModel.station.lng)) {
                             Button {
-                                withAnimation {
+                                Task {
                                     showStationDetails.toggle()
+                                    await getDirections()
                                 }
                             } label: {
                                 HStack(spacing: 4) {
-                                    Text("\(station.bike)")
+                                    Text("\(viewModel.station.bike)")
                                         .font(.system(size: 16, weight: .bold))
                                         .foregroundColor(.black)
                                     Image(.bike)
@@ -44,8 +51,18 @@ struct BikeStationDetailView: View {
                                 .background(RoundedRectangle(cornerRadius: 15).fill(Color.white))
                             }
                         }
+
+                        if let route, showStationDetails {
+                            MapPolyline(route.polyline)
+                                .stroke(.blue, lineWidth: 6)
+                        }
                     }
-                    .edgesIgnoringSafeArea(.all)
+                    .mapStyle(.standard)
+                    .mapControls {
+                        MapUserLocationButton()
+                        MapCompass()
+                        MapScaleView()
+                    }
 
                     VStack {
                         Spacer()
@@ -59,6 +76,23 @@ struct BikeStationDetailView: View {
             }
             .edgesIgnoringSafeArea(.top)
         }
+    }
+
+    func getDirections() async {
+        guard let userLocation = viewModel.locationManager.location else { return }
+        let request = MKDirections.Request()
+        let sourcePlacemark = MKPlacemark(coordinate: userLocation.coordinate)
+        let routeSource = MKMapItem(placemark: sourcePlacemark)
+        let destinatinPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: viewModel.station.lat, longitude: viewModel.station.lng))
+        routeDestination = MKMapItem(placemark: destinatinPlacemark)
+        routeDestination?.name = viewModel.station.name
+        request.source = routeSource
+        request.destination = routeDestination
+        request.transportType = transportType
+        let directions = MKDirections(request: request)
+        let result = try? await directions.calculate()
+        route = result?.routes.first
+        travelInterval = route?.expectedTravelTime
     }
 }
 

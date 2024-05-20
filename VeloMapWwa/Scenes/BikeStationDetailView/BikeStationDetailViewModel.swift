@@ -5,14 +5,17 @@
 //  Created by Dawid Czmyr on 19/05/2024.
 //
 
-import _MapKit_SwiftUI
-import Foundation
+import Combine
 import MapKit
+import SwiftUI
 
 class BikeStationDetailViewModel: ObservableObject {
-    var station: Place
-    var region: MKCoordinateRegion
-    var cameraPosition: MapCameraPosition
+    @Published var station: Place
+    @Published var region: MKCoordinateRegion
+    @Published var userLocation: CLLocation?
+
+    var locationManager = LocationManager()
+    private var cancellables = Set<AnyCancellable>()
 
     init(station: Place) {
         self.station = station
@@ -20,6 +23,17 @@ class BikeStationDetailViewModel: ObservableObject {
             center: CLLocationCoordinate2D(latitude: station.lat, longitude: station.lng),
             span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         )
-        cameraPosition = MapCameraPosition.region(region)
+        bindingForLocation()
     }
+    
+    private func bindingForLocation() {
+        locationManager.$location
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] location in
+                guard let self = self else { return }
+                self.userLocation = location
+            }
+            .store(in: &cancellables)
+    }
+        
 }
