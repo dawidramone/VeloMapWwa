@@ -26,7 +26,7 @@ struct BikeStationDetailView: View {
         } content: {
             VStack {
                 ZStack {
-                    Map(position: $viewModel.position) {
+                    Map(position: $viewModel.position, bounds: MapCameraBounds(minimumDistance: 1000)) {
                         UserAnnotation()
                         Annotation("", coordinate: CLLocationCoordinate2D(latitude: viewModel.station.lat, longitude: viewModel.station.lng)) {
                             Button {

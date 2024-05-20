@@ -7,14 +7,15 @@
 
 import Combine
 import CoreLocation
+import SwiftUI
 
 @MainActor
 class BikeStationsViewModel: ObservableObject {
     @Published var hasAppeared = false
     @Published var bikeStations: [Place] = []
     @Published var isLoading: Bool = false
-    @Published var errorMessage: String?
     @Published var userLocation: CLLocation?
+    @Published var hasError: Bool = false
 
     private var locationManager = LocationManager()
     private var cancellables = Set<AnyCancellable>()
@@ -31,16 +32,15 @@ class BikeStationsViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func fetchBikeStations() async {
-        isLoading = true
-        errorMessage = nil
+    func fetchBikeStations(isLoading: Bool = true) async {
+        self.isLoading = isLoading
         do {
             let response: BikeStationResponse = try await NetworkingManager.shared.fetchData(from: .warsawBikeStations, responseType: BikeStationResponse.self)
 
-            var warsawStations = response.countries
-                .flatMap { $0.cities }
-                .filter { $0.name.lowercased() == "warszawa" || $0.name.lowercased() == "warsaw" }
-                .flatMap { $0.places }
+            let countries = response.countries
+            let cities = countries.flatMap { $0.cities }
+            let warsawCities = cities.filter { $0.name.lowercased() == "warszawa" || $0.name.lowercased() == "warsaw" }
+            var warsawStations = warsawCities.flatMap { $0.places }
 
             if let userLocation = userLocation {
                 warsawStations = warsawStations.map { updateDistance(for: $0, from: userLocation) }
@@ -48,10 +48,10 @@ class BikeStationsViewModel: ObservableObject {
             }
 
             bikeStations = warsawStations
-            isLoading = false
+            self.isLoading = false
         } catch {
-            errorMessage = "Failed to fetch data: \(error.localizedDescription)"
-            isLoading = false
+            hasError = true
+            self.isLoading = false
         }
     }
 

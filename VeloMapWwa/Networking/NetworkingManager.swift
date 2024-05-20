@@ -16,7 +16,6 @@ final class NetworkingManager {
         case invalidURL
         case requestFailed(Error)
         case invalidResponse
-        case decodingFailed(Error)
     }
 
     func fetchData<T: Decodable>(from endpoint: Endpoint, responseType: T.Type) async throws -> T {

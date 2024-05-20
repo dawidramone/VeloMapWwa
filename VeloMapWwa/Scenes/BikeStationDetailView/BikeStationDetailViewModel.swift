@@ -11,7 +11,6 @@ import SwiftUI
 
 class BikeStationDetailViewModel: ObservableObject {
     @Published var station: Place
-    @Published var region: MKCoordinateRegion
     @Published var userLocation: CLLocation?
     @Published var route: MKRoute?
     @Published var routeDestination: MKMapItem?
@@ -23,10 +22,6 @@ class BikeStationDetailViewModel: ObservableObject {
 
     init(station: Place) {
         self.station = station
-        region = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: station.lat, longitude: station.lng),
-            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        )
         bindingForLocation()
     }
 
