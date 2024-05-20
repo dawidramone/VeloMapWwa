@@ -17,10 +17,12 @@ class BikeStationsViewModel: ObservableObject {
     @Published var userLocation: CLLocation?
     @Published var hasError: Bool = false
 
-    private var locationManager = LocationManager()
+    private var locationManager: LocationManager
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
+    init(locationManager: LocationManager = LocationManager()) {
+        self.locationManager = locationManager
+
         locationManager.$location
             .receive(on: DispatchQueue.main)
             .sink { [weak self] location in
@@ -55,14 +57,14 @@ class BikeStationsViewModel: ObservableObject {
         }
     }
 
-    private func calculateDistances() async {
+    func calculateDistances() async {
         defer { isLoading = false }
         guard let userLocation = userLocation else { return }
 
         bikeStations = bikeStations.map { updateDistance(for: $0, from: userLocation) }
     }
 
-    private func updateDistance(for station: Place, from userLocation: CLLocation) -> Place {
+    func updateDistance(for station: Place, from userLocation: CLLocation) -> Place {
         var updatedStation = station
         let stationLocation = CLLocation(latitude: station.lat, longitude: station.lng)
         updatedStation.distance = userLocation.distance(from: stationLocation)

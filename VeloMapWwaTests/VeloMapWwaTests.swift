@@ -5,30 +5,70 @@
 //  Created by Dawid Czmyr on 19/05/2024.
 //
 
+import Combine
+import CoreLocation
 @testable import VeloMapWwa
 import XCTest
 
 final class VeloMapWwaTests: XCTestCase {
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    var viewModel: BikeStationsViewModel!
+    var cancellables: Set<AnyCancellable>!
+
+    @MainActor override func setUp() {
+        super.setUp()
+        viewModel = BikeStationsViewModel(locationManager: MockLocationManager())
+        cancellables = []
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown() {
+        viewModel = nil
+        cancellables = nil
+        super.tearDown()
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    @MainActor
+    func testCalculateDistancesWithUserLocation() async {
+        let expectation = XCTestExpectation(description: "Distance calculation completed")
+
+        let station1 = Place(id: 1, name: "Station 1", bike: 1, freeRacks: 1, lat: 52.2296756, lng: 21.0122287)
+        let station2 = Place(id: 2, name: "Station 2", bike: 2, freeRacks: 3, lat: 52.406374, lng: 16.9251681)
+
+        viewModel.bikeStations = [station1, station2]
+        viewModel.userLocation = CLLocation(latitude: 52.2296756, longitude: 21.0122287)
+
+        await viewModel.calculateDistances()
+
+        XCTAssertNotNil(viewModel.bikeStations[0].distance)
+        XCTAssertNotNil(viewModel.bikeStations[1].distance)
+
+        expectation.fulfill()
+        await fulfillment(of: [expectation], timeout: 1.0)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    @MainActor
+    func testUpdateDistance() {
+        let station = Place(id: 1, name: "Station 1", bike: 1, freeRacks: 1, lat: 52.2296756, lng: 21.0122287)
+        let userLocation = CLLocation(latitude: 52.2296756, longitude: 21.0122287)
+
+        let updatedStation = viewModel.updateDistance(for: station, from: userLocation)
+
+        XCTAssertEqual(updatedStation.distance, 0)
+    }
+
+    @MainActor
+    func testUpdateDistanceNotEqual() {
+        let station = Place(id: 1, name: "Station 1", bike: 1, freeRacks: 1, lat: 52.2296756, lng: 21.0122287)
+        let userLocation = CLLocation(latitude: 51.2296756, longitude: 21.0122287)
+
+        let updatedStation = viewModel.updateDistance(for: station, from: userLocation)
+
+        XCTAssertNotEqual(updatedStation.distance, 0)
+    }
+}
+
+class MockLocationManager: LocationManager {
+    override init() {
+        super.init()
+        location = CLLocation(latitude: 52.2296756, longitude: 21.0122287)
     }
 }
