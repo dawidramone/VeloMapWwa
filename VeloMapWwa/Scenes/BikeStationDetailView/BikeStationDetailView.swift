@@ -13,11 +13,8 @@ struct BikeStationDetailView: View {
     @ObservedObject var viewModel: BikeStationDetailViewModel
 
     @State private var showStationDetails = false
-    @State private var route: MKRoute?
-    @State private var routeDestination: MKMapItem?
-    @State private var position: MapCameraPosition = .automatic
-    @State private var transportType = MKDirectionsTransportType.walking
-    @State private var travelInterval: TimeInterval?
+
+    private let stroke = StrokeStyle(lineWidth: 2, lineCap: .square, lineJoin: .miter, dash: [5, 5])
 
     init(station: Place) {
         _viewModel = ObservedObject(wrappedValue: BikeStationDetailViewModel(station: station))
@@ -29,13 +26,13 @@ struct BikeStationDetailView: View {
         } content: {
             VStack {
                 ZStack {
-                    Map(position: $position) {
+                    Map(position: $viewModel.position) {
                         UserAnnotation()
                         Annotation("", coordinate: CLLocationCoordinate2D(latitude: viewModel.station.lat, longitude: viewModel.station.lng)) {
                             Button {
                                 Task {
                                     showStationDetails.toggle()
-                                    await getDirections()
+                                    await viewModel.getDirections()
                                 }
                             } label: {
                                 HStack(spacing: 4) {
@@ -52,9 +49,9 @@ struct BikeStationDetailView: View {
                             }
                         }
 
-                        if let route, showStationDetails {
+                        if let route = viewModel.route, showStationDetails {
                             MapPolyline(route.polyline)
-                                .stroke(.blue, lineWidth: 6)
+                                .stroke(.blue, style: stroke)
                         }
                     }
                     .mapStyle(.standard)
@@ -76,23 +73,6 @@ struct BikeStationDetailView: View {
             }
             .edgesIgnoringSafeArea(.top)
         }
-    }
-
-    func getDirections() async {
-        guard let userLocation = viewModel.locationManager.location else { return }
-        let request = MKDirections.Request()
-        let sourcePlacemark = MKPlacemark(coordinate: userLocation.coordinate)
-        let routeSource = MKMapItem(placemark: sourcePlacemark)
-        let destinatinPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: viewModel.station.lat, longitude: viewModel.station.lng))
-        routeDestination = MKMapItem(placemark: destinatinPlacemark)
-        routeDestination?.name = viewModel.station.name
-        request.source = routeSource
-        request.destination = routeDestination
-        request.transportType = transportType
-        let directions = MKDirections(request: request)
-        let result = try? await directions.calculate()
-        route = result?.routes.first
-        travelInterval = route?.expectedTravelTime
     }
 }
 
