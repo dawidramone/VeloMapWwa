@@ -70,7 +70,23 @@ struct BikeStationDetailView: View {
                     .opacity(showStationDetails ? 1 : 0)
                     .offset(y: showStationDetails ? 0 : UIScreen.main.bounds.height)
                     .animation(.easeInOut(duration: 0.5), value: showStationDetails)
+
+                    if viewModel.isLoading {
+                        ProgressView("Loading...")
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 10)
+                    }
                 }
+            }
+            .alert(isPresented: $viewModel.hasError) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text("Something went wrong..."),
+                    dismissButton: .default(Text("OK"))
+                )
             }
             .edgesIgnoringSafeArea(.top)
         }

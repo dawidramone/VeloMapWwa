@@ -10,6 +10,8 @@ import MapKit
 import SwiftUI
 
 class BikeStationDetailViewModel: ObservableObject, LocationSubscriber {
+    @Published var isLoading = false
+    @Published var hasError: Bool = false
     @Published var station: Place
     @Published var userLocation: CLLocation?
     @Published var route: MKRoute?
@@ -28,6 +30,8 @@ class BikeStationDetailViewModel: ObservableObject, LocationSubscriber {
 
     @MainActor
     func getDirections() async {
+        defer { isLoading = false }
+        isLoading = true
         guard let userLocation = locationManager.location else { return }
         let request = MKDirections.Request()
         let sourcePlacemark = MKPlacemark(coordinate: userLocation.coordinate)
@@ -41,7 +45,12 @@ class BikeStationDetailViewModel: ObservableObject, LocationSubscriber {
         request.destination = routeDestination
         request.transportType = transportType
         let directions = MKDirections(request: request)
-        let result = try? await directions.calculate()
-        route = result?.routes.first
+        do {
+            let result = try await directions.calculate()
+            route = result.routes.first
+
+        } catch {
+            hasError = true
+        }
     }
 }

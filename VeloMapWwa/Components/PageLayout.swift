@@ -68,6 +68,5 @@ struct PageLayout<Content: View>: View {
         VStack {
             Text("Hello, World!")
         }
-
     })
 }
