@@ -14,8 +14,6 @@ struct BikeStationDetailView: View {
 
     @State private var showStationDetails = false
 
-    private let stroke = StrokeStyle(lineWidth: 2, lineCap: .square, lineJoin: .miter, dash: [5, 5])
-
     init(station: Place) {
         _viewModel = ObservedObject(wrappedValue: BikeStationDetailViewModel(station: station))
     }
@@ -51,7 +49,10 @@ struct BikeStationDetailView: View {
 
                         if let route = viewModel.route, showStationDetails {
                             MapPolyline(route.polyline)
-                                .stroke(.blue, style: stroke)
+                                .stroke(.blue, style: StrokeStyle(lineWidth: 2,
+                                                                  lineCap: .square,
+                                                                  lineJoin: .miter,
+                                                                  dash: [5, 5]))
                         }
                     }
                     .mapStyle(.standard)

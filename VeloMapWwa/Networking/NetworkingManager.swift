@@ -12,14 +12,14 @@ final class NetworkingManager {
 
     private init() {}
 
-    enum NetworkError: Error {
+    fileprivate enum NetworkError: Error {
         case invalidURL
         case requestFailed(Error)
         case invalidResponse
     }
 
     func fetchData<T: Decodable>(from endpoint: Endpoint, responseType: T.Type) async throws -> T {
-        guard let url = URL(string: endpoint.path) else {
+        guard let url = endpoint.url else {
             throw NetworkError.invalidURL
         }
 

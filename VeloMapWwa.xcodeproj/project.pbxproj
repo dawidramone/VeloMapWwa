@@ -11,7 +11,7 @@
 		7736DAD92BFA0EC8005373D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7736DAD82BFA0EC8005373D3 /* Assets.xcassets */; };
 		7736DADC2BFA0EC8005373D3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7736DADB2BFA0EC8005373D3 /* Preview Assets.xcassets */; };
 		7736DAE62BFA0EC8005373D3 /* VeloMapWwaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DAE52BFA0EC8005373D3 /* VeloMapWwaTests.swift */; };
-		7736DB072BFA1515005373D3 /* BikeStationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB062BFA1515005373D3 /* BikeStationResponse.swift */; };
+		7736DB072BFA1515005373D3 /* BikeStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB062BFA1515005373D3 /* BikeStations.swift */; };
 		7736DB092BFA1605005373D3 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB082BFA1605005373D3 /* NetworkingManager.swift */; };
 		7736DB0B2BFA17C5005373D3 /* BikeStationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB0A2BFA17C4005373D3 /* BikeStationRowView.swift */; };
 		7736DB0E2BFA1C3C005373D3 /* BottomShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB0D2BFA1C3C005373D3 /* BottomShadow.swift */; };
@@ -25,6 +25,10 @@
 		7736DB202BFA4628005373D3 /* BikeStationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB1F2BFA4628005373D3 /* BikeStationDetailView.swift */; };
 		7736DB232BFA83DE005373D3 /* PageLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB222BFA83DE005373D3 /* PageLayout.swift */; };
 		7736DB262BFAA08C005373D3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB252BFAA08C005373D3 /* LocationManager.swift */; };
+		7736DB2E2BFCFCE9005373D3 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB2D2BFCFCE9005373D3 /* Country.swift */; };
+		7736DB302BFCFE17005373D3 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB2F2BFCFE17005373D3 /* City.swift */; };
+		7736DB322BFCFE37005373D3 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB312BFCFE37005373D3 /* Place.swift */; };
+		7736DB352BFD029B005373D3 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7736DB342BFD029B005373D3 /* View+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +56,7 @@
 		7736DAE12BFA0EC8005373D3 /* VeloMapWwaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeloMapWwaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7736DAE52BFA0EC8005373D3 /* VeloMapWwaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeloMapWwaTests.swift; sourceTree = "<group>"; };
 		7736DAEB2BFA0EC8005373D3 /* VeloMapWwaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VeloMapWwaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7736DB062BFA1515005373D3 /* BikeStationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeStationResponse.swift; sourceTree = "<group>"; };
+		7736DB062BFA1515005373D3 /* BikeStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeStations.swift; sourceTree = "<group>"; };
 		7736DB082BFA1605005373D3 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		7736DB0A2BFA17C4005373D3 /* BikeStationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeStationRowView.swift; sourceTree = "<group>"; };
 		7736DB0D2BFA1C3C005373D3 /* BottomShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomShadow.swift; sourceTree = "<group>"; };
@@ -67,6 +71,10 @@
 		7736DB222BFA83DE005373D3 /* PageLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLayout.swift; sourceTree = "<group>"; };
 		7736DB242BFA9F8C005373D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7736DB252BFAA08C005373D3 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		7736DB2D2BFCFCE9005373D3 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		7736DB2F2BFCFE17005373D3 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		7736DB312BFCFE37005373D3 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		7736DB342BFD029B005373D3 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +124,7 @@
 		7736DAD32BFA0EC7005373D3 /* VeloMapWwa */ = {
 			isa = PBXGroup;
 			children = (
+				7736DB332BFD019D005373D3 /* Extensions */,
 				7736DB242BFA9F8C005373D3 /* Info.plist */,
 				7736DB212BFA83AB005373D3 /* Components */,
 				7736DB112BFA23D2005373D3 /* Utility */,
@@ -123,8 +132,8 @@
 				7736DB052BFA14FF005373D3 /* Models */,
 				7736DB032BFA138C005373D3 /* Networking */,
 				7736DAFE2BFA0F3B005373D3 /* App */,
-				7736DAFF2BFA0F48005373D3 /* Scenes */,
 				7736DB002BFA0F69005373D3 /* Resources */,
+				7736DAFF2BFA0F48005373D3 /* Scenes */,
 				7736DADA2BFA0EC8005373D3 /* Preview Content */,
 			);
 			path = VeloMapWwa;
@@ -203,7 +212,7 @@
 		7736DB052BFA14FF005373D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7736DB062BFA1515005373D3 /* BikeStationResponse.swift */,
+				7736DB2C2BFCFCA0005373D3 /* BikeStationResponse */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,6 +249,25 @@
 				7736DB222BFA83DE005373D3 /* PageLayout.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		7736DB2C2BFCFCA0005373D3 /* BikeStationResponse */ = {
+			isa = PBXGroup;
+			children = (
+				7736DB062BFA1515005373D3 /* BikeStations.swift */,
+				7736DB2D2BFCFCE9005373D3 /* Country.swift */,
+				7736DB2F2BFCFE17005373D3 /* City.swift */,
+				7736DB312BFCFE37005373D3 /* Place.swift */,
+			);
+			path = BikeStationResponse;
+			sourceTree = "<group>";
+		};
+		7736DB332BFD019D005373D3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7736DB342BFD029B005373D3 /* View+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,16 +403,20 @@
 				7736DB092BFA1605005373D3 /* NetworkingManager.swift in Sources */,
 				7736DB1A2BFA32DB005373D3 /* Colors.swift in Sources */,
 				7736DB262BFAA08C005373D3 /* LocationManager.swift in Sources */,
+				7736DB352BFD029B005373D3 /* View+Extension.swift in Sources */,
 				7736DB182BFA2E2E005373D3 /* Endpoint.swift in Sources */,
 				7736DAD52BFA0EC7005373D3 /* VeloMapWwaApp.swift in Sources */,
 				7736DB0E2BFA1C3C005373D3 /* BottomShadow.swift in Sources */,
-				7736DB072BFA1515005373D3 /* BikeStationResponse.swift in Sources */,
+				7736DB072BFA1515005373D3 /* BikeStations.swift in Sources */,
 				7736DB202BFA4628005373D3 /* BikeStationDetailView.swift in Sources */,
 				7736DB102BFA2142005373D3 /* BikeStationsListView.swift in Sources */,
+				7736DB302BFCFE17005373D3 /* City.swift in Sources */,
 				7736DB0B2BFA17C5005373D3 /* BikeStationRowView.swift in Sources */,
 				7736DB142BFA23EA005373D3 /* Coordinator.swift in Sources */,
 				7736DB232BFA83DE005373D3 /* PageLayout.swift in Sources */,
+				7736DB2E2BFCFCE9005373D3 /* Country.swift in Sources */,
 				7736DB162BFA23F6005373D3 /* CoordinatorView.swift in Sources */,
+				7736DB322BFCFE37005373D3 /* Place.swift in Sources */,
 				7736DB1E2BFA45EF005373D3 /* BikeStationsViewModel.swift in Sources */,
 				7736DB1C2BFA45C0005373D3 /* BikeStationDetailViewModel.swift in Sources */,
 			);
@@ -552,11 +584,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VeloMapWwa/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to show nearby bike stations.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show nearby bike stations.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -565,9 +600,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dcz.VeloMapWwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -583,11 +622,14 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VeloMapWwa/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location to show nearby bike stations.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to show nearby bike stations.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -596,9 +638,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dcz.VeloMapWwa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

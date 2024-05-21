@@ -1,24 +1,11 @@
 //
-//  BikeStationResponse.swift
+//  Place.swift
 //  VeloMapWwa
 //
-//  Created by Dawid Czmyr on 19/05/2024.
+//  Created by Dawid Czmyr on 21/05/2024.
 //
 
 import Foundation
-
-struct BikeStationResponse: Codable {
-    let countries: [Country]
-}
-
-struct Country: Codable {
-    let cities: [City]
-}
-
-struct City: Codable {
-    let name: String
-    let places: [Place]
-}
 
 struct Place: Codable, Identifiable, Hashable {
     let id: Int

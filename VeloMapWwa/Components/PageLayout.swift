@@ -39,7 +39,7 @@ struct PageLayout<Content: View>: View {
                     .padding(.top, topSafeAreaInset)
                 }
             }
-            .frame(height: 44 + topSafeAreaInset)
+            .frame(height: 40 + topSafeAreaInset)
             .background(Color.customNavyBlue)
 
             content()
@@ -47,6 +47,7 @@ struct PageLayout<Content: View>: View {
 
             Spacer(minLength: 0)
         }
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             updateSafeAreaInsets()
         }
@@ -65,7 +66,6 @@ struct PageLayout<Content: View>: View {
 #Preview {
     PageLayout(showBackButton: false, onBackClick: {}, content: {
         VStack {
-            Text("Hello, World!")
             Text("Hello, World!")
         }
 

@@ -9,7 +9,7 @@ import Combine
 import MapKit
 import SwiftUI
 
-class BikeStationDetailViewModel: ObservableObject {
+class BikeStationDetailViewModel: ObservableObject, LocationSubscriber {
     @Published var station: Place
     @Published var userLocation: CLLocation?
     @Published var route: MKRoute?
@@ -17,22 +17,13 @@ class BikeStationDetailViewModel: ObservableObject {
     @Published var position: MapCameraPosition = .automatic
     @Published var transportType = MKDirectionsTransportType.walking
 
-    var locationManager = LocationManager()
-    private var cancellables = Set<AnyCancellable>()
+    var locationManager: LocationManager
+    var cancellables = Set<AnyCancellable>()
 
-    init(station: Place) {
+    init(station: Place, locationManager: LocationManager = LocationManager()) {
         self.station = station
-        bindingForLocation()
-    }
-
-    private func bindingForLocation() {
-        locationManager.$location
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] location in
-                guard let self = self else { return }
-                self.userLocation = location
-            }
-            .store(in: &cancellables)
+        self.locationManager = locationManager
+        subscribeToLocationUpdates()
     }
 
     @MainActor

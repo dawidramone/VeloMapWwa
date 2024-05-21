@@ -9,35 +9,35 @@ import Combine
 import CoreLocation
 import SwiftUI
 
-@MainActor
-class BikeStationsViewModel: ObservableObject {
+class BikeStationsViewModel: ObservableObject, LocationSubscriber {
     @Published var hasAppeared = false
     @Published var bikeStations: [Place] = []
     @Published var isLoading: Bool = false
-    @Published var userLocation: CLLocation?
+    @Published var userLocation: CLLocation? {
+        didSet {
+            Task {
+                await calculateDistances()
+            }
+        }
+    }
+
     @Published var hasError: Bool = false
 
-    private var locationManager: LocationManager
-    private var cancellables = Set<AnyCancellable>()
+    var locationManager: LocationManager
+    var cancellables = Set<AnyCancellable>()
 
     init(locationManager: LocationManager = LocationManager()) {
         self.locationManager = locationManager
-
-        locationManager.$location
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] location in
-                self?.userLocation = location
-                Task {
-                    await self?.calculateDistances()
-                }
-            }
-            .store(in: &cancellables)
+        subscribeToLocationUpdates()
     }
 
+    @MainActor
     func fetchBikeStations(isLoading: Bool = true) async {
-        self.isLoading = isLoading
+        defer { self.isLoading = false }
+
         do {
-            let response: BikeStationResponse = try await NetworkingManager.shared.fetchData(from: .warsawBikeStations, responseType: BikeStationResponse.self)
+            self.isLoading = isLoading
+            let response: BikeStations = try await NetworkingManager.shared.fetchData(from: API.Endpoints.nextbikeLive(city: .warsaw), responseType: BikeStations.self)
 
             let countries = response.countries
             let cities = countries.flatMap { $0.cities }
@@ -46,19 +46,16 @@ class BikeStationsViewModel: ObservableObject {
 
             if let userLocation = userLocation {
                 warsawStations = warsawStations.map { updateDistance(for: $0, from: userLocation) }
-                warsawStations.sort { ($0.distance ?? Double.greatestFiniteMagnitude) < ($1.distance ?? Double.greatestFiniteMagnitude) }
+                warsawStations.sort { ($0.distance ?? .greatestFiniteMagnitude) < ($1.distance ?? .greatestFiniteMagnitude) }
             }
-
             bikeStations = warsawStations
-            self.isLoading = false
         } catch {
             hasError = true
-            self.isLoading = false
         }
     }
 
+    @MainActor
     func calculateDistances() async {
-        defer { isLoading = false }
         guard let userLocation = userLocation else { return }
 
         bikeStations = bikeStations.map { updateDistance(for: $0, from: userLocation) }
