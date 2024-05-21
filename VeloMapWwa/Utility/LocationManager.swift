@@ -31,14 +31,13 @@ extension LocationSubscriber {
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var location: CLLocation?
-    private var cancellables = Set<AnyCancellable>()
 
     override init() {
         super.init()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = 10
+        locationManager.distanceFilter = 5
         locationManager.startUpdatingLocation()
 
         NotificationCenter.default.addObserver(self,
