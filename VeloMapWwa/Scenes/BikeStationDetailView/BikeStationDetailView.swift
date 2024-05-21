@@ -84,7 +84,7 @@ struct BikeStationDetailView: View {
             .alert(isPresented: $viewModel.hasError) {
                 Alert(
                     title: Text("Error"),
-                    message: Text("Something went wrong..."),
+                    message: Text("Unable to display the route to the bike station."),
                     dismissButton: .default(Text("OK"))
                 )
             }
